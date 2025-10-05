@@ -1,0 +1,19 @@
+---
+description: Notion page/database helpers
+type: code
+globs:
+  - "functions/src/lib/**/*.ts"
+---
+
+# Notion Policy
+- Use official SDK; thin wrapper functions for create/read/update
+- Keep mapping from internal types → Notion properties in one module
+
+# Example
+```ts
+import { Client } from "@notionhq/client";
+import { getSecret } from "./secrets";
+
+export async function notion() {
+  return new Client({ auth: await getSecret("NOTION_TOKEN") });
+}

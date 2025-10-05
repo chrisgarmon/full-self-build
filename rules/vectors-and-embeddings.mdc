@@ -1,0 +1,23 @@
+---
+description: How to do embeddings + vector upsert/query
+type: code
+globs:
+  - "functions/src/lib/**/*.ts"
+---
+
+# Embedding Policy
+- Use `text-embedding-3-small` unless caller overrides
+- Normalize vectors (if store supports it)
+- Include metadata (id, type, source) for filtering
+
+# Example (Qdrant)
+```ts
+// lib/vectors.ts
+import { QdrantClient } from "@qdrant/js-client-rest";
+import { getSecret } from "./secrets";
+
+export async function getQdrant() {
+  const url = await getSecret("QDRANT_URL");
+  const apiKey = await getSecret("QDRANT_API_KEY");
+  return new QdrantClient({ url, apiKey });
+}

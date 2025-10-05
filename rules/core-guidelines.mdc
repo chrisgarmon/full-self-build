@@ -1,0 +1,25 @@
+---
+description: Core coding standards, style, and habits for this repo
+type: general
+globs:
+  - "**/*"
+---
+
+# Project Overview
+- Name: Regenerate AI
+- Stack: TypeScript, Node.js, Firebase Functions, Notion, Infisical, Vector DB (Qdrant/Pinecone/pgvector)
+- Goals: clean, testable code; minimal secrets exposure; stable APIs
+
+# Style & Conventions
+- Language: TypeScript, strict mode on
+- Patterns: functional-first; DI for external services; small, pure functions
+- Tests: write tests first when feasible; include edge cases; keep examples minimal but runnable
+- Errors: Never swallow; return typed `Result` or throw with clear messages
+
+# Commit & PR
+- Use conventional commits; small, focused PRs; include a quick "why" in PR body
+
+# LLM Behavior
+- Prefer minimal, working diffs
+- If task is ambiguous, propose 2–3 succinct approaches, then implement the chosen one
+- Always include a short rationale in code comments for non-obvious decisions

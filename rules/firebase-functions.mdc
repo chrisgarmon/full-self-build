@@ -1,0 +1,27 @@
+---
+description: Structure and scaffolding for Firebase HTTPS functions
+type: code
+globs:
+  - "functions/src/**/*.ts"
+---
+
+# Function Pattern
+- One file per endpoint; shared libs in `functions/src/lib/*`
+- Validate input with zod; return `200 { ok: true, data }` or typed error
+
+# Template
+```ts
+import * as functions from "firebase-functions";
+import { z } from "zod";
+
+const Body = z.object({ text: z.string().min(1) });
+
+export const embedText = functions.https.onRequest(async (req, res) => {
+  try {
+    const { text } = Body.parse(req.body);
+    // call service...
+    res.status(200).send({ ok: true, data: /* ... */});
+  } catch (err: any) {
+    res.status(400).send({ ok: false, error: err.message });
+  }
+});
